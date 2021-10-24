@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BackEnd_Spring.iml" filepath="$PROJECT_DIR$/.idea/BackEnd_Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EZSpring/EZSpring.iml" filepath="$PROJECT_DIR$/EZSpring/EZSpring.iml" />
     </modules>
   </component>
 </project>

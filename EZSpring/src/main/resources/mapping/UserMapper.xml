@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ervin.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.ervin.po.User">
+        <result column="userId" jdbcType="INTEGER" property="userId" />
+        <result column="userName" jdbcType="VARCHAR" property="userName" />
+    </resultMap>
+
+    <select id="getUser" resultType="com.ervin.po.User">
+        select *
+        from user
+        where userId = #{userId}
+    </select>
+
+    <insert id="addUser" parameterType="com.ervin.po.User">
+        insert into user (userId, userName)
+        values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateUser" parameterType="com.ervin.po.User">
+        update user
+        set userName = #{userName}
+        where userId = #{userId}
+    </update>
+
+    <delete id="deleteUser">
+        delete from user
+        where userId = #{userId}
+    </delete>
+
+    <select id="queryUserByParams" parameterType="com.ervin.query.UserQuery" resultType="com.ervin.po.User">
+        select *
+        from user
+        <where>
+            <if test="null!=userName and ''!=userName">
+                and userName like concat('%',#{userName},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

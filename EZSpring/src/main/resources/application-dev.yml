@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: root001
+    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main/java   # 重启的目录
+      poll-interval: 3000   # 避免自动重新编译后404
+      quiet-period: 1000
+  web:
+    resources:
+      static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+
+  servlet:
+    multipart:
+      max-request-size: 10MB  # 上传文件总的最大值
+      max-file-size: 10MB  # 单个文件的最大值
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.ervin.po
+
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

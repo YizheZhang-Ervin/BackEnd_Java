@@ -1,11 +1,16 @@
 # BackEnd_Spring
 
 ## SpringBoot
-- 基础功能 (BasicUtils)
-  - 核心类 (CoreUtils)
-  - 集合 (CollectionsUtils)
+- 基础功能 (Utils.BasicUtils)
+  - 核心类
+  - 集合
 
-- 读文件/配置 (IOUtils)
+- 三方库功能 (Utils.LibUtils)
+  - Apache Commons
+  - Guava
+  - Spring Utils
+
+- 读文件/配置 (Utils.IOUtils)
   - IO
   - XML/JSON
   - 使用配置properties/yml
@@ -23,19 +28,19 @@
   - websocket
   - Open API
   - Actuator监控
-  
+  - Security
+  - Scheduler
+
 - 中间件 (MiddlewareUtils)
   - 数据库mybatis+mysql
   - redis
   - kafka
   
-- 测试及日志
+- 测试及日志 (test)
   - 单元测试
   - log4j
 
 - 附加功能 (ExtraUtils)
-  - Security
-  - Scheduler
   - 邮件javaMail
   - 发送消息JMS-Artemis
   - 管理监控JMX

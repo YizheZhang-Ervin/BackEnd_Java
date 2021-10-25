@@ -7,7 +7,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-public class ReadFileByStream {
+public class RWFileByStream {
     public static void main(String[] args) throws IOException {
         String pathName = "classpath:/IOTest.json";
         // 输入、输出
@@ -23,7 +23,7 @@ public class ReadFileByStream {
 
     static void input(String pathName) throws IOException {
         // 流输入
-        InputStream input1 = ReadFileByStream.class.getResourceAsStream(pathName);
+        InputStream input1 = RWFileByStream.class.getResourceAsStream(pathName);
         InputStream input2 = new FileInputStream(pathName);
         byte[] buffer = new byte[1000];
         int n2 = input2.read(buffer); // 读文件到缓冲

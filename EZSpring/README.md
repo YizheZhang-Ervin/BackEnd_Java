@@ -1,0 +1,106 @@
+# TMPL_Spring
+## Spring
+- IOC
+  - 注入
+      - 手动注入
+      - 自动注入
+        - @Autowired + @Qualifier
+        - @Resource
+  - 扫描器
+    - @Repository
+    - @Service
+    - @Controller
+    - @Component
+- AOP
+    - 代理
+      - 静态代理
+      - 动态代理
+        - JDK
+        - CGLIB
+    - 实现
+      - @Aspect + @PointCut + @Before / @After / @AfterReturning / @AfterThrowing / @Around
+- 事务
+    - @Transactional()
+  
+## SpringMVC
+- 页面控制器
+  - @RequestMapping(value,method,params)
+- 参数绑定
+  - @RequestParam
+- 请求转发/重定向
+  - 请求域
+    - ModelAndView / HttpServletRequest / Model / ModelMap / Map
+  - 请求转发 forward
+  - 重定向 redirect
+- JSON数据
+  - @ResponseBody
+  - @RequestBody
+- 拦截器
+  - 实现HandlerInterceptor
+  - 继承HandlerInterceptorAdapter
+- 文件上传
+  - common-fileuplaod
+- RESTful 
+  - @GetMapping
+  - @PostMapping
+  - @PutMapping
+  - @DeleteMapping
+- 全局异常处理
+  - SimpleMappingExceptionResolver
+  - 自定义HandlerExceptionResolver
+  - @ExceptionHandler
+
+## SpringBoot
+- 声明Bean
+  - @Component
+  - @Service
+  - @Repository
+  - @Controller
+- 注入Bean
+  - @Autowired
+  - @Inject
+  - @Resource
+- 配置获取Bean
+  - @Configuration
+  - @ComponentScan
+  - @Component
+  - @Bean
+  - @PropertySource + @Value
+- 组合注解/元注解
+- 使用SpringMVC零配置
+  - @EnableWebMvc
+  - 实现WebApplicationInitializer接口
+- SpringBoot配置
+  - @SpringBootApplication
+  - 改banner
+  - 配置application.properties
+  - 配置application-{profile}.properties
+  - 日志
+- 视图集成
+  - Freemarker
+  - Thymeleaf
+- 静态资源访问
+- 项目打包部署
+- MyBatis整合&数据访问
+  - 查/增/改/删/分页
+- 事务
+  - @Transactional(propagation)
+- 全局异常处理
+  - @ControllerAdvice
+  - 特定异常处理 @ExceptionHandler
+- 数据校验
+  - @NotNull / @NotEmpty / @NotBlank / @Size / @Email / @Length
+- 分布式缓存Ehcache
+  - @CacheConfig
+  - @Cacheable
+  - @CachePut
+  - @CacheEvict
+  - @Caching
+- 单元测试
+  - 业务逻辑层: @RunWith + @SpringBootTest + @Test + @Before + @After 
+  - 控制层: @AutoConfigureMockMvc + @RunWith + @SpringBootTest + @Test + @Before + @After 
+- 热部署
+- API文档构建工具Swagger2
+  - @EnableSwagger2
+  - @Api / @ApiOperation / @ApiImplicitParams/ @ApiResponses / @ApiModel + @ApiModelProperty
+- Quartz定时任务

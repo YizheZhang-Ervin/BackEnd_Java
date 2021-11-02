@@ -1,6 +1,7 @@
 package com.ervin.EZSpring.WebEntrance.exceptions;
 
 import org.springframework.validation.BindException;
+import com.ervin.EZSpring.WebEntrance.exceptions.ParamsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

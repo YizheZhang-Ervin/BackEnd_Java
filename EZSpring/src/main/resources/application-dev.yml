@@ -37,3 +37,9 @@ logging:
     com:
       example:
         mapper : debug
+        
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

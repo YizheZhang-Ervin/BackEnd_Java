@@ -18,6 +18,7 @@ import java.util.Map;
 @RestController
 //@RequestMapping("/test")
 public class UserController {
+    public static final String KEY_USER = "__user__";
 
     @Resource
     private UserService userService;
@@ -79,5 +80,26 @@ public class UserController {
     @ApiImplicitParam(name="userQuery",value="user query")
     public PageInfo<User> queryUserByParams(UserQuery userQuery){
         return userService.queryUserByParams(userQuery);
+    }
+
+    // 用户登录
+    @PostMapping("/signin")
+    public Map<String, Object> signin(@RequestBody SignInRequest signinRequest) {
+        try {
+            User user = userService.signin(signinRequest.email, signinRequest.password);
+            Map<String,Object> map = new HashMap<>();
+            map.put("user", user);
+            return map;
+        } catch (Exception e) {
+            Map<String,Object> map = new HashMap<>();
+            map.put("error", "SIGNIN_FAILED");
+            map.put("message", e.getMessage());
+            return map;
+        }
+    }
+
+    static class SignInRequest {
+        public String email;
+        public String password;
     }
 }

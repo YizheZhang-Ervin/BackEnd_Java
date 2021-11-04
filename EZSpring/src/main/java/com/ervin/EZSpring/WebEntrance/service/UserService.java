@@ -5,6 +5,8 @@ import com.ervin.EZSpring.WebEntrance.po.User;
 import com.ervin.EZSpring.WebEntrance.query.UserQuery;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @Service
 public class UserService {
+    final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
     UserDao userDao;
@@ -50,5 +53,14 @@ public class UserService {
         List<User> userList = userDao.queryUserByParams(userQuery); // 查询
         PageInfo<User> pageInfo = new PageInfo<>(userList);
         return pageInfo;
+    }
+
+    public User signin(String name, String userId) {
+        logger.info("try login by {}...", userId);
+        User user = getUser(Integer.parseInt(userId));
+        if (user.getUserName().equals(name)) {
+            return user;
+        }
+        throw new RuntimeException("login failed.");
     }
 }

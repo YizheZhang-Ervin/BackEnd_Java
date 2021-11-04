@@ -29,6 +29,14 @@ class XXConfig {
     private String strKey;
     private int intKey;
 
+    public void setStrKey(String strKey) {
+        this.strKey = strKey;
+    }
+
+    public void setIntKey(int intKey) {
+        this.intKey = intKey;
+    }
+
     public String getStrKey() {
         return strKey;
     }

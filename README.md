@@ -23,12 +23,15 @@
   - listener
   - cookie/session
   - cors
-  - 定时任务quartz
-  - 数据库mybatis+mysql+pagehelper
-  - 缓存ehcache
   - 模板thymeleaf
-  - Open API文档swagger2
-  
+  - 异步
+  - 附加功能
+    - Open API文档swagger2
+    - 定时任务quartz
+    - websocket
+    - 邮件javaMail
+    - 国际化
+
 - 测试及日志 (test)
   - 单元测试junit
   - log4j
@@ -37,15 +40,10 @@
   - Prometheus
   - Actuator
   - Druid
-  - 管理监控JMX(暂无)
+  - JMX & jolokia
 
 - 中间件
-  - 数据库Mysql+Mybatis
-  - Redis(暂无)
-  - 发送消息JMS-Artemis/Kafka/Kafka Streams(暂无)
-
-- 其他
-  - 国际化(暂无)
-  - 异步(暂无)
-  - websocket(暂无)
-  - 邮件javaMail(暂无)
+  - 数据库mybatis+mysql+pagehelper
+  - 缓存ehcache
+  - Redis
+  - 发送消息JMS-Artemis/ActiveMQ/Kafka

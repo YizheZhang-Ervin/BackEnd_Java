@@ -54,7 +54,7 @@ public class AuthFilterRegistrationBean extends FilterRegistrationBean<Filter> {
                 if (pos > 0) {
                     String name = URLDecoder.decode(up.substring(0, pos), String.valueOf(StandardCharsets.UTF_8));
                     String userId = URLDecoder.decode(up.substring(pos + 1), String.valueOf(StandardCharsets.UTF_8));
-                    User user = userService.signin(name,userId);
+                    User user = userService.signin(name,Integer.parseInt(userId));
                     req.getSession().setAttribute(UserController.KEY_USER, user);
                     logger.info("user {} login by authorization header ok.", name);
                 }

@@ -55,12 +55,20 @@ public class UserService {
         return pageInfo;
     }
 
-    public User signin(String name, String userId) {
+    public User signin(String name, Integer userId) {
         logger.info("try login by {}...", userId);
-        User user = getUser(Integer.parseInt(userId));
+        User user = getUser(userId);
         if (user.getUserName().equals(name)) {
             return user;
         }
         throw new RuntimeException("login failed.");
+    }
+
+    public User register(String name,Integer userId) {
+        logger.info("try register by {}...", userId);
+        User user = new User();
+        user.setUserName(name);
+        addUser(user);
+        return user;
     }
 }

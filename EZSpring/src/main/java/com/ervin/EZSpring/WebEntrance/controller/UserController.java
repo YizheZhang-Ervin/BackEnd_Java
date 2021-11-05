@@ -86,7 +86,7 @@ public class UserController {
     @PostMapping("/signin")
     public Map<String, Object> signin(@RequestBody SignInRequest signinRequest) {
         try {
-            User user = userService.signin(signinRequest.email, signinRequest.password);
+            User user = userService.signin(signinRequest.name, signinRequest.userId);
             Map<String,Object> map = new HashMap<>();
             map.put("user", user);
             return map;
@@ -99,7 +99,7 @@ public class UserController {
     }
 
     static class SignInRequest {
-        public String email;
-        public String password;
+        public String name;
+        public Integer userId;
     }
 }

@@ -8,14 +8,17 @@ import com.ervin.EZSpring.WebEntrance.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@RestController
 public class UserKafkaController {
     final Logger logger = LoggerFactory.getLogger(getClass());
     public static final String KEY_USER = "__user__";

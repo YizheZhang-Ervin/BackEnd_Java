@@ -1,4 +1,4 @@
-package com.ervin.SuperStorm.controller;
+package com.ervin.EZSpring.WebEntrance.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/sessioncookie")
 @CrossOrigin
 public class SessionCookieController {
-    @RequestMapping("/add")
+    @RequestMapping("/add/session")
     public String addSession(HttpServletRequest httpServletRequest,
                              @RequestParam("username")String username) {
         HttpSession session = httpServletRequest.getSession();
@@ -23,14 +23,14 @@ public class SessionCookieController {
         return "添加成功";
     }
 
-    @RequestMapping("/show")
+    @RequestMapping("/show/session")
     public Object showSession(HttpServletRequest httpServletRequest) {
         HttpSession session = httpServletRequest.getSession();
         Object object = session.getAttribute("username");
         return object;
     }
 
-    @RequestMapping("/add")
+    @RequestMapping("/add/cookie")
     public String addCookie(HttpServletRequest request, HttpServletResponse response,
                             @RequestParam("username")String username) {
         Cookie cookie = new Cookie("username", username);
@@ -40,7 +40,7 @@ public class SessionCookieController {
         return "添加成功";
     }
 
-    @RequestMapping("/show")
+    @RequestMapping("/show/cookie")
     public String showCookie(HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {

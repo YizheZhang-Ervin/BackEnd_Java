@@ -4,6 +4,7 @@ import com.ervin.EZSpring.WebEntrance.po.User;
 import com.ervin.EZSpring.WebEntrance.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.annotation.Resource;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
+@RestController
 public class AsyncController {
     @Resource
     private UserService userService;

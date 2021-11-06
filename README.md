@@ -38,7 +38,9 @@
 
 - 监控
   - Prometheus
-  - Actuator(Http或JMX&jolokia)
+  - Actuator (Http或JMX&jolokia)
+    - EzMonitor为Actuator Server
+    - EzSpring为Actuator Client
   - Druid
 
 - 中间件

@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 @ConfigurationProperties("spring.redis")
-public class RedisConfiguration {
+public class RedisCustomConfiguration {
     private String host;
     private int port;
     private String password;

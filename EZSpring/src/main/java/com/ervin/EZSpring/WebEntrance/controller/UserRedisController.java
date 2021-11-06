@@ -5,9 +5,11 @@ import com.ervin.EZSpring.WebEntrance.service.RedisService;
 import com.ervin.EZSpring.WebEntrance.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+@RestController
 public class UserRedisController {
 
     public static final String KEY_USER_ID = "__userid__";
@@ -43,7 +46,7 @@ public class UserRedisController {
         }
         return null;
     }
-    @PostMapping("/signin")
+    @PostMapping("/signin3")
     public Map<String,Object> doSignin(@RequestParam("name") String name, @RequestParam("userId") Integer userId, HttpSession session) throws Exception {
         Map<String,Object> map = new HashMap<>();
         try {
@@ -59,7 +62,7 @@ public class UserRedisController {
         return map;
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/profile3")
     public Map<String,Object> profile(HttpSession session) throws Exception {
         User user = getUserFromRedis(session);
         Map<String,Object> map = new HashMap<>();

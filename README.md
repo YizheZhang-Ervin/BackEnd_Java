@@ -38,9 +38,8 @@
 
 - 监控
   - Prometheus
-  - Actuator
+  - Actuator(Http或JMX&jolokia)
   - Druid
-  - JMX & jolokia
 
 - 中间件
   - 数据库mybatis+mysql+pagehelper

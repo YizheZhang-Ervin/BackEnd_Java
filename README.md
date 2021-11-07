@@ -45,6 +45,5 @@
 
 - 中间件
   - 数据库mybatis+mysql+pagehelper
-  - 缓存ehcache
-  - Redis
+  - 缓存ehcache / Redis
   - 发送消息JMS-Artemis/ActiveMQ/Kafka

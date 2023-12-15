@@ -1,0 +1,30 @@
+server:
+  port: 9002 #端口
+spring:
+  application:
+    name: zuul #服务名称
+##路由配置
+zuul:
+  routes:
+    serviceproducer: # 路由id
+      path: /service-producer/** # 映射路径
+      # url: http://127.0.0.1:8901 #映射路径对应的实际微服务url地址
+      serviceId: service-producer # 配置转发的微服务的服务名称
+      # 如果路由id 和 对应的微服务的serviceId一致的话
+      # service-producer: /service-producer/**
+      # zuul中的默认路由配置
+      # 如果当前的微服务名称 service-producer , 默认的请求映射路径 /service-producer/**
+    serviceconsumer:
+      path: /service-consumer/**
+      serviceId: service-consumer
+
+#配置Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka
+  instance:
+    prefer-ip-address: false #使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+    # lease-renewal-interval-in-seconds: 5 #向注册中心中注册服务id
+    # lease-expiration-duration-in-seconds: 10 #续约到期的时间

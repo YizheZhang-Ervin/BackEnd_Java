@@ -1,0 +1,46 @@
+# Api Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+  labels:
+    app: api-service
+    service: api-service
+spec:
+  ports:
+    - port: 8001
+      name: http
+  selector:
+    app: api-service
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8s-app-api-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service-v1
+  labels:
+    app: api-service
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: api-service
+        version: v1
+    spec:
+      serviceAccountName: k8s-app-api-service
+      containers:
+        - image: ervin/k8s-app-api-service:1.0
+          imagePullPolicy: Always
+          name: k8s-app-api-service
+          ports:
+            - containerPort: 8001

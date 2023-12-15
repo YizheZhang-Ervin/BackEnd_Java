@@ -1,0 +1,46 @@
+# Portal
+apiVersion: v1
+kind: Service
+metadata:
+  name: portal
+  labels:
+    app: portal
+    service: portal
+spec:
+  ports:
+    - port: 8000
+      name: http
+  selector:
+    app: portal
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8s-app-portal
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-v1
+  labels:
+    app: portal
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portal
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: portal
+        version: v1
+    spec:
+      serviceAccountName: k8s-app-portal
+      containers:
+        - image: ervin/k8s-app-portal:1.0.0
+          imagePullPolicy: Always
+          name: k8s-app-portal
+          ports:
+            - containerPort: 8000

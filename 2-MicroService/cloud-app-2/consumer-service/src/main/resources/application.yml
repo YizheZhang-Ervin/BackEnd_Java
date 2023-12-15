@@ -1,0 +1,19 @@
+server:
+  port: 8902 #端口
+spring:
+  application:
+    name: consumer-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:9001   #sentinel控制台的请求地址
+      datasource:
+        ds1:
+          file:
+            file: classpath:flowrule.json
+            data-type: json
+            rule-type: flow
+      eager: true #立即加载

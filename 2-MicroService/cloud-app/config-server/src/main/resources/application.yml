@@ -1,0 +1,34 @@
+server:
+  port: 9001 #服务端口
+spring:
+  application:
+    name: config-server #指定服务名
+  profiles:
+    active: composite
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    config:
+      server:
+#        git:
+#          uri: https://xxgit/xxrepo
+#          skipSslValidation: true
+        composite:
+          - type: native
+            search-locations: classpath:/
+        bootstrap: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka
+  instance:
+    prefer-ip-address: false #使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+    # lease-renewal-interval-in-seconds: 5 #向注册中心中注册服务id
+    # lease-expiration-duration-in-seconds: 10 #续约到期的时间

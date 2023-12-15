@@ -1,0 +1,21 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: hystrix-turbine
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka
+  instance:
+    prefer-ip-address: false #使用ip地址注册
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+    # lease-renewal-interval-in-seconds: 5 #向注册中心中注册服务id
+    # lease-expiration-duration-in-seconds: 10 #续约到期的时间
+turbine:
+  # 要监控的微服务列表，多个用,分隔
+  appConfig: service-consumer
+  clusterNameExpression: "'default'"
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

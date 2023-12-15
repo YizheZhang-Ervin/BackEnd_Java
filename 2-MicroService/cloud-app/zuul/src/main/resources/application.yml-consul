@@ -1,0 +1,37 @@
+server:
+  port: 9002 #端口
+spring:
+  application:
+    name: zuul #服务名称
+  ###开始配置consul的服务注册
+  cloud:
+    consul:
+      host: 127.0.0.1 #consul服务器的主机地址
+      port: 9000 #consul服务器的ip地址
+      discovery:
+        #是否需要注册
+        register: true
+        #注册的实例ID (唯一标志)
+        instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+        #服务的名称
+        service-name: ${spring.application.name}
+        #服务的请求端口
+        port: ${server.port}
+        #指定开启ip地址注册
+        prefer-ip-address: true
+        #当前服务的请求ip
+        ip-address: ${spring.cloud.client.ip-address}
+##路由配置
+zuul:
+  routes:
+    serviceproducer: # 路由id
+      path: /service-producer/** # 映射路径
+      # url: http://127.0.0.1:8901 #映射路径对应的实际微服务url地址
+      serviceId: service-producer # 配置转发的微服务的服务名称
+      # 如果路由id 和 对应的微服务的serviceId一致的话
+      # service-producer: /service-producer/**
+      # zuul中的默认路由配置
+      # 如果当前的微服务名称 service-producer , 默认的请求映射路径 /service-producer/**
+    serviceconsumer:
+      path: /service-consumer/**
+      serviceId: service-consumer

@@ -1,0 +1,50 @@
+server:
+  port: 8902
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    username: root
+    password: root001
+    driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: service-consumer
+#  zipkin:
+#    base-url: http://127.0.0.1:9004/ #server的请求地址
+#    sender:
+#      type: web #数据的传输方式 , 已http的形式向server端发送数据
+#  sleuth:
+#    sampler:
+#      probability: 1 #采样比
+mybatis:
+  type-aliases-package: com.ervin.serviceproducer.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.ervin: debug
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+ribbon:
+  eager-load:
+    enabled: true # 开启饥饿加载
+    clients: # 指定饥饿加载的服务名称
+      - service-prodcuer
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 #默认的连接超时时间1秒,若1秒没有返回数据,自动的触发降级逻辑
+      circuitBreaker:
+        enabled: true
+        requestVolumeThreshold: 5
+        errorThresholdPercentage: 10
+        sleepWindowInMilliseconds: 10000

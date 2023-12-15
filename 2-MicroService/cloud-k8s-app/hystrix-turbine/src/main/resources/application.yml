@@ -1,0 +1,12 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: hystrix-turbine
+turbine:
+  # 要监控的微服务列表，多个用,分隔
+  appConfig: service-consumer
+  clusterNameExpression: "'default'"
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "localhost"

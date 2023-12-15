@@ -1,0 +1,66 @@
+server:
+  port: 8901
+spring:
+  application:
+    name: service-producer
+  profiles:
+    active: dev # 环境
+  cloud:
+    config:
+      name: service-producer #应用名称,需要对应git中配置文件名称的前半部分
+      profile: dev # 开发环境
+      label: master # git中的分支
+      #uri: http://localhost:9001 # config-server的请求地址
+      #通过注册中心获取config-server配置
+      discovery:
+        enabled: true #开启服务发现
+        service-id: config-server
+    consul:
+      host: 127.0.0.1 #consul服务器的主机地址
+      port: 9000 #consul服务器的ip地址
+      discovery:
+        #是否需要注册
+        register: true
+        #注册的实例ID (唯一标志)
+        instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+        #服务的名称
+        service-name: ${spring.application.name}
+        #服务的请求端口
+        port: ${server.port}
+        #指定开启ip地址注册
+        prefer-ip-address: true
+        #当前服务的请求ip
+        ip-address: ${spring.cloud.client.ip-address}
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useSSL=false
+    username: root
+    password: root001
+    driver-class-name: com.mysql.jdbc.Driver
+  # shardingsphere:
+  #   sharding:
+  #     default-database-strategy:
+  #     tables:
+  #      discovery:
+  #        cluster-name: HZ
+  zipkin:
+    base-url: http://127.0.0.1:9004/ #server的请求地址
+    sender:
+      type: web #数据的传输方式 , 已http的形式向server端发送数据
+  sleuth:
+    sampler:
+      probability: 1 #采样比
+mybatis:
+  type-aliases-package: com.ervin.serviceproducer.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.ervin: debug
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss:SSS
+pattern:
+  name: pattern001
+  dateformat: yyyy-MM-dd HH:mm:ss:SSS
+  envSharedValue: value001

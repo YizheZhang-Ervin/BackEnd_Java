@@ -1,0 +1,11 @@
+server:
+  port: 9001 #端口
+spring:
+  applicaton:
+    name: admin-service
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+        service-labels:
+          spring-boot: true

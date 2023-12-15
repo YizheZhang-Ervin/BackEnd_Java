@@ -1,0 +1,41 @@
+server:
+  port: 9001 #服务端口
+spring:
+  application:
+    name: config-server #指定服务名
+  profiles:
+    active: composite
+  cloud:
+    consul:
+      host: 127.0.0.1 #consul服务器的主机地址
+      port: 9000 #consul服务器的ip地址
+      discovery:
+        #是否需要注册
+        register: true
+        #注册的实例ID (唯一标志)
+        instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+        #服务的名称
+        service-name: ${spring.application.name}
+        #服务的请求端口
+        port: ${server.port}
+        #指定开启ip地址注册
+        prefer-ip-address: true
+        #当前服务的请求ip
+        ip-address: ${spring.cloud.client.ip-address}
+    loadbalancer:
+      ribbon:
+        enabled: false
+    config:
+      server:
+        #        git:
+        #          uri: https://xxgit/xxrepo
+        #          skipSslValidation: true
+        composite:
+          - type: native
+            search-locations: classpath:/
+        bootstrap: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

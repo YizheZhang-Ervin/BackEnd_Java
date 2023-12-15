@@ -1,0 +1,59 @@
+server:
+  port: 9002
+logging:
+  level:
+    com.ervin: debug
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+spring:
+  application:
+    name: gateway
+  cloud:
+    consul:
+      host: 127.0.0.1 #consul服务器的主机地址
+      port: 9000 #consul服务器的ip地址
+      discovery:
+        #是否需要注册
+        register: true
+        #注册的实例ID (唯一标志)
+        instance-id: ${spring.cloud.client.ip-address}:${server.port} #向注册中心中注册服务id
+        #服务的名称
+        service-name: ${spring.application.name}
+        #服务的请求端口
+        port: ${server.port}
+        #指定开启ip地址注册
+        prefer-ip-address: true
+        #当前服务的请求ip
+        ip-address: ${spring.cloud.client.ip-address}
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启根据服务名称自动转发
+          lower-case-service-id: true #微服务名称已小写形式呈现
+      routes:
+        - id: serviceproducer # 路由标示，必须唯一
+          uri: lb://service-producer # 路由的目标地址
+          predicates: # 路由断言，判断请求是否符合规则
+            - Path=/user/** # 路径断言，判断路径是否是以/user开头，如果是则符合
+        #          filters:
+        #            - RewritePath=/service-producer/(?<segment>.*), /$\{segment}
+        - id: serviceconsumer
+          uri: lb://service-consumer
+          predicates:
+            - Path=/order/**
+#          filters:
+#            #        - name: RequestRateLimiter   # RequestRateLimiter使用限流过滤器,是springcloud gateway提供的
+#            #          args:
+#            #            # 使用SpEL从容器中获取对象
+#            #            key-resolver: '#{@userKeyResolver}'
+#            #            # 令牌桶每秒填充平均速率
+#            #            redis-rate-limiter.replenishRate: 1    # replenishRate : 向令牌桶中填充的速率
+#            #            # 令牌桶的上限
+#            #            redis-rate-limiter.burstCapacity: 3      # burstCapacity :令牌桶的容量
+#            - RewritePath=/service-consumer/(?<segment>.*), /$\{segment}
+
+# RequestRateLimiter : 使用限流过滤器,是springcloud gateway提供的
+# 参数  replenishRate : 向令牌桶中填充的速率
+#     burstCapacity :令牌桶的容量
+#      default-filters:
+#        - AddRequestHeader=Truth,GO!
